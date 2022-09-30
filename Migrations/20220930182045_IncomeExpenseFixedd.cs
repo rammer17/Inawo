@@ -4,7 +4,7 @@
 
 namespace Inawo.Migrations
 {
-    public partial class Innit : Migration
+    public partial class IncomeExpenseFixedd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

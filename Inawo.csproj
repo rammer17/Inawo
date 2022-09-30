@@ -22,10 +22,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\DB\" />
-    <Folder Include="Models\Response\" />
-    <Folder Include="Models\Request\" />
-  </ItemGroup>
-
 </Project>

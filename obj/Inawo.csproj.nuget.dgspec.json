@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "R:\\Inawo\\Inawo.csproj": {}
+    "G:\\Inawo\\Inawo.csproj": {}
   },
   "projects": {
-    "R:\\Inawo\\Inawo.csproj": {
+    "G:\\Inawo\\Inawo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "R:\\Inawo\\Inawo.csproj",
+        "projectUniqueName": "G:\\Inawo\\Inawo.csproj",
         "projectName": "Inawo",
-        "projectPath": "R:\\Inawo\\Inawo.csproj",
+        "projectPath": "G:\\Inawo\\Inawo.csproj",
         "packagesPath": "C:\\Users\\Georgi\\.nuget\\packages\\",
-        "outputPath": "R:\\Inawo\\obj\\",
+        "outputPath": "G:\\Inawo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
