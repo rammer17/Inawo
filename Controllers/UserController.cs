@@ -24,7 +24,6 @@ namespace Inawo.Controllers
             Configuration = configuration;
         }
 
-
         [HttpGet]
         public ActionResult<List<UserGetResponse>> GetAll()
         {
@@ -33,6 +32,7 @@ namespace Inawo.Controllers
                 .Include(x => x.Expenses)
                 .Select(x => new UserGetResponse
                 {
+                    Id = x.Id,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     Email = x.Email,
@@ -41,33 +41,24 @@ namespace Inawo.Controllers
                     Balance = x.Balance,
                     Transactions = x.Transactions
                 }).ToList();
+
             foreach(var user in users)
             {
-                //user.CurrentListings = _dbContext.Listings
-                //                    .Where(x => x.AuthorId == user.Id)
-                //                    .Select(x => new ListingGetAllResponse()
-                //                    {
-                //                        Id = x.Id,
-                //                        AuthorId = x.AuthorId,
-                //                        Description = x.Description,
-                //                        Location = x.Location,
-                //                        Price = x.Price,
-                //                        TimesBookmarked = x.TimesBookmarked,
-                //                        Title = x.Title,
-                //                        Views = x.Views,
-                //                        ListingCategoryId = x.ListingCategoryId
-                //                    });
-
-                //user.Incomes = _dbContext.Incomes
-                //                .Where(x => x.AccountId == user.Id)
-                //                .Select(x => new IncomeGetAllResponse()
-                //                {
-                //                    Id = x.Id,
-                //                    Date = x.Date,
-                //                    Amount = x.Amount,
-                //                    AccountId = user.Id
-                //                });
-                
+                user.Incomes = _dbContext.Incomes.Where(x => x.AccountId == user.Id).Select(x => new IncomeGetAllResponse()
+                {
+                    Id = x.Id,
+                    AccountId = x.AccountId,
+                    Amount = x.Amount,
+                    Date = x.Date
+                });
+                user.Expenses = _dbContext.Expenses.Where(x => x.AccountId == user.Id).Select(x => new ExpenseGetAllResponse()
+                {
+                    Id = x.Id,
+                    AccountId = x.AccountId,
+                    Amount = x.Amount,
+                    Date = x.Date,
+                    Title = x.Title
+                });
             }
 
             return Ok(users);
@@ -83,11 +74,16 @@ namespace Inawo.Controllers
             var user = _dbContext.Users
                 .Include(x => x.Incomes)
                 .Include(x => x.Expenses)
-                .Where(x => x.Id == id).FirstOrDefault();
+                .Where(x => x.Id == id).First();
 
+            if (user == null)
+            {
+                return BadRequest("Invalid ID!");
+            }
 
             var response =  new UserGetResponse
             {
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -96,6 +92,22 @@ namespace Inawo.Controllers
                 Balance = user.Balance,
                 Transactions = user.Transactions
             };
+
+            response.Incomes = _dbContext.Incomes.Where(x => x.AccountId == id).Select(x => new IncomeGetAllResponse()
+            {
+                Id = x.Id,
+                AccountId = x.AccountId,
+                Amount = x.Amount,
+                Date = x.Date
+            });
+            response.Expenses = _dbContext.Expenses.Where(x => x.AccountId == user.Id).Select(x => new ExpenseGetAllResponse()
+            {
+                Id = x.Id,
+                AccountId = x.AccountId,
+                Amount = x.Amount,
+                Date = x.Date,
+                Title = x.Title
+            });
 
             return Ok(response);
         }

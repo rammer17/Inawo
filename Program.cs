@@ -63,6 +63,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -78,7 +79,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
-app.UseRouting();
 
 app.UseCors(builder =>
 builder.WithOrigins("http://localhost:5000")
@@ -87,8 +87,9 @@ builder.WithOrigins("http://localhost:5000")
 .AllowAnyMethod());
 
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseRouting();
+app.UseAuthorization();
 
 app.MapControllers();
 

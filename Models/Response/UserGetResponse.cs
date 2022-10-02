@@ -12,7 +12,7 @@ namespace Inawo.Models.Response
         public string DateCreated { get; set; }
         public double Balance { get; set; }
         public int Transactions { get; set; }
-        public ICollection<Income> Incomes { get; set; }
-        public ICollection<Expense> Expenses { get; set; }
+        public IEnumerable<IncomeGetAllResponse> Incomes { get; set; }
+        public IEnumerable<ExpenseGetAllResponse> Expenses { get; set; }
     }
 }
