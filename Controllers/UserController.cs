@@ -25,6 +25,7 @@ namespace Inawo.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<List<UserGetResponse>> GetAll()
         {
             var users = _dbContext.Users
@@ -109,6 +110,7 @@ namespace Inawo.Controllers
                 Title = x.Title
             });
 
+
             return Ok(response);
         }
 
@@ -160,6 +162,38 @@ namespace Inawo.Controllers
                 Token = token
             };
             return Ok(response);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public ActionResult UpdateAccount(UserUpdateRequest request)
+        {
+            var requesterId = GetUserIdFromToken(User);
+            var userForUpdate = _dbContext.Users.Where(x => x.Id == requesterId).FirstOrDefault();
+
+            if (userForUpdate == null)
+                return BadRequest("No such account exists!");
+
+            if (userForUpdate.Email != request.Email)
+                userForUpdate.Email = request.Email;
+            if(userForUpdate.Password != ComputeSha256Hash(request.Password))
+                userForUpdate.Password = ComputeSha256Hash(request.Password);
+
+            _dbContext.Update(userForUpdate);
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public ActionResult DeleteAccount(UserDeleteRequest request)
+        {
+            var userForDelete = _dbContext.Users.Where(x => x.Id == request.Id).FirstOrDefault();
+            if(userForDelete == null)
+                return NotFound();
+            _dbContext.Remove(userForDelete);
+            _dbContext.SaveChanges();
+            return Ok();
         }
 
         private string CreateJwtToken(User user)
@@ -219,7 +253,6 @@ namespace Inawo.Controllers
                 throw new Exception("Id value is null");
             }
         }
-
 
     }
 }

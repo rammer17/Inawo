@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inawo.Migrations
 {
     [DbContext(typeof(InawoDBContext))]
-    [Migration("20220930181846_Innit")]
+    [Migration("20221003111039_Innit")]
     partial class Innit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

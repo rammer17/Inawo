@@ -9,11 +9,11 @@ namespace Inawo.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    public class IncomeController : Controller
+    public class ExpenseController : Controller
     {
         public InawoDBContext _dbContext;
         public IConfiguration Configuration { get; }
-        public IncomeController(InawoDBContext dbContext, IConfiguration configuration)
+        public ExpenseController(InawoDBContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
             Configuration = configuration;
@@ -21,11 +21,11 @@ namespace Inawo.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult<List<IncomeGetAllResponse>> GetAll()
+        public ActionResult<List<ExpenseGetAllResponse>> GetAll()
         {
             var requesterId = GetUserIdFromToken(User);
 
-            var response = _dbContext.Incomes
+            var response = _dbContext.Expenses
                 .Where(x => x.AccountId == requesterId)
                 .ToList();
 
@@ -34,14 +34,14 @@ namespace Inawo.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult<List<IncomeGetAllResponse>> GetAllByDate(string request)
+        public ActionResult<List<ExpenseGetAllResponse>> GetAllByDate(string request)
         {
             var monthReq = int.Parse(request.Split('/')[0]);
             var yearReq = int.Parse(request.Split('/')[1]);
 
             var requesterId = GetUserIdFromToken(User);
 
-            var response = _dbContext.Incomes
+            var response = _dbContext.Expenses
                 .Where(x => x.AccountId == requesterId && x.Date.Month == monthReq && x.Date.Year == yearReq)
                 .ToList();
 
@@ -50,25 +50,26 @@ namespace Inawo.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddIncome (IncomeAddRequest request)
+        public ActionResult AddExpense(ExpenseAddRequest request)
         {
             var accountId = GetUserIdFromToken(User);
             var account = _dbContext.Users.Where(x => x.Id == accountId).First();
             if (account == null)
                 return BadRequest("The is no such user!");
-            account.Balance += request.Amount;
+            account.Balance -= request.Amount;
             account.Transactions++;
 
-            var newIncome = new Income
+            var newExpense = new Expense
             {
                 Amount = request.Amount,
+                Title = request.Title,
                 Date = DateTime.Now,
                 AccountId = accountId,
-                Account = account,
+                Account = account
             };
 
             _dbContext.Users.Update(account);
-            _dbContext.Incomes.Add(newIncome);
+            _dbContext.Expenses.Add(newExpense);
             _dbContext.SaveChanges();
 
             return Ok();
@@ -76,45 +77,46 @@ namespace Inawo.Controllers
 
         [HttpPut]
         [Authorize]
-        public ActionResult UpdateIncome(IncomeUpdateRequest request)
+        public ActionResult UpdateExpense(ExpenseUpdateRequest request)
         {
             var accountId = GetUserIdFromToken(User);
             var account = _dbContext.Users.Where(x => x.Id == accountId).FirstOrDefault();
             if (account == null)
                 return BadRequest("The is no such user!");
 
-            var incomeForUpdate = _dbContext.Incomes.Where(x => x.Id == request.Id).First();
-            if (incomeForUpdate == null)
-                return BadRequest("Incorrect income ID!");
-            account.Balance -= incomeForUpdate.Amount;
-            incomeForUpdate.Amount = request.Amount;
-            account.Balance += incomeForUpdate.Amount;
+            var expenseForUpdate = _dbContext.Expenses.Where(x => x.Id == request.Id).First();
+            if (expenseForUpdate == null)
+                return BadRequest("Incorrect expense ID!");
+            expenseForUpdate.Amount = request.Amount;
+            account.Balance += expenseForUpdate.Amount;
+            expenseForUpdate.Amount = request.Amount;
+            account.Balance -= expenseForUpdate.Amount;
 
             _dbContext.Users.Update(account);
-            _dbContext.Incomes.Update(incomeForUpdate);
+            _dbContext.Expenses.Update(expenseForUpdate);
             _dbContext.SaveChanges();
             return Ok();
         }
 
         [HttpDelete]
         [Authorize]
-        public ActionResult DeleteIncome (IncomeDeleteRequest request)
+        public ActionResult DeleteExpense(ExpenseDeleteRequest request)
         {
             var requesterId = GetUserIdFromToken(User);
-            var incomeForDelete = _dbContext.Incomes.Where(x => x.Id == request.Id).FirstOrDefault();
-            if (incomeForDelete is null)
-                return BadRequest("Such income does not exist!");
-            if (incomeForDelete.AccountId != requesterId)
+            var expenseForDelete = _dbContext.Expenses.Where(x => x.Id == request.Id).FirstOrDefault();
+            if (expenseForDelete is null)
+                return BadRequest("Such expense does not exist!");
+            if (expenseForDelete.AccountId != requesterId)
                 return BadRequest("You don't have permission to delete this");
 
             var account = _dbContext.Users.Where(x => x.Id == requesterId).FirstOrDefault();
             if (account == null)
                 return BadRequest("The is no such user!");
-            account.Balance -= incomeForDelete.Amount;
+            account.Balance += expenseForDelete.Amount;
             account.Transactions--;
 
             _dbContext.Users.Update(account);
-            _dbContext.Remove(incomeForDelete);
+            _dbContext.Remove(expenseForDelete);
             _dbContext.SaveChanges();
             return Ok();
         }
@@ -140,9 +142,5 @@ namespace Inawo.Controllers
                 throw new Exception("Id value is null");
             }
         }
-
     }
 }
-
-
-
