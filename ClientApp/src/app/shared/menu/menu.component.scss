@@ -1,0 +1,33 @@
+.container-fluid {
+    min-height: 500px;
+    background-color: var(--yellow-dark);
+}
+.tabs {
+    font-size: 18px;
+    background-color: var(--blue-mid);
+    transition: .15s;
+    overflow: hidden;
+}
+li.tabs.pointer:hover {
+    background-color: var(--blue-light);
+}
+li.tabs {
+    white-space: nowrap;
+}
+.signoutTab {
+    background-color: red;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+.pointer {
+    cursor: pointer;
+}
+.spread {
+    transition: .3s;
+    width: 100% !important; 
+}
+.collapsed {
+    transition: .3s;
+    width: 15% !important;
+}
