@@ -8,6 +8,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {InputTextModule} from 'primeng/inputtext';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderComponent,
     MenuComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
