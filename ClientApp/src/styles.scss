@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --text-light: #eeeeee;
+    --text-dark: #212121;
+
+    --blue-dark: #00296b;
+    --blue-mid: #003f88;
+    --blue-light: #00509d;
+    --yellow-dark: #fdc500;
+    --yellow-light: #ffd500;
+}
+* {
+    color: var(--text-light);
+    margin: 0 !important;
+    padding: 0 !important;
+}

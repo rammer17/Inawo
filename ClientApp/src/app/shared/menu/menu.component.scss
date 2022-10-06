@@ -1,0 +1,24 @@
+.container-fluid {
+    min-height: 500px;
+    background-color: var(--blue-dark);
+    border-right: 2px solid var(--blue-light);
+}
+.tabs {
+    font-size: 18px;
+    background-color: var(--blue-dark);
+    transition: .15s;
+    border-radius: 10px;
+}
+li {
+    list-style: none;
+}
+li.tabs.pointer:hover {
+    background-color: var(--blue-mid);
+    border: 1px solid var(--blue-light);
+}
+.signoutTab {
+    background-color: var(--yellow-dark);
+}
+.pointer {
+    cursor: pointer;
+}

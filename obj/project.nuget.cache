@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3RTIwbreYzX439MRiv+R36M7IX6Swml5i7L9nU4eK/poxQtDzyRYgeQdVvwrmZFswCjJTyx7wtDMdxO0OQM3Rg==",
+  "dgSpecHash": "IzZfHUAmaC3eCy8VlZHJ3tHF0Hl3HVPIzVS1dl3DVEgdiQmNdMOenNA3SYrcvIUkn0oPuQP1cmrn+cDrM2dcwg==",
   "success": true,
-  "projectFilePath": "R:\\Inawo\\Inawo.csproj",
+  "projectFilePath": "G:\\Inawo\\Inawo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Georgi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Georgi\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.9\\microsoft.aspnetcore.authentication.jwtbearer.6.0.9.nupkg.sha512",
