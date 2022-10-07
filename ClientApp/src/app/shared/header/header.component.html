@@ -1,12 +1,18 @@
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-sm-6 col-12">
-            <h3 class="text-center">Welcome back!</h3>
-        </div>
-        <div class="col-sm-6 col-12">
-            <div class="searchBar text-center">
-                <input id="float-input" type="text" pInputText> 
-            </div>
-        </div>
+<div class="container-fluid py-2">
+  <div class="row d-flex justify-content-between px-5">
+    <div class="col-sm-6 col-12 d-flex justify-content-center flex-column">
+      <span>Hi Ivan borisov,</span>
+      <h3 class="m-0">Welcome back!</h3>
     </div>
+    <div class="col-sm-6 col-12">
+      <span class="p-input-icon-left float-end">
+        <i class="pi pi-search" (click)="click()"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Search"
+          [(ngModel)]="value2"/>
+      </span>
+    </div>
+  </div>
 </div>
