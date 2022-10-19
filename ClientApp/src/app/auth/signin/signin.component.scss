@@ -1,0 +1,16 @@
+:host::ng-deep {
+  .form {
+    width: 600px;
+    border: 1.5px solid var(--blue-light);
+    border-radius: 12px;
+    background-color: var(--blue-mid);
+    padding: 30px;
+  }
+  .wrapper {
+    min-height: 1200px;
+  }
+  input:focus + label,
+  input + label {
+    color: var(--text-dark);
+  }
+}

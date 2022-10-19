@@ -9,11 +9,12 @@ import { MenuComponent } from './shared/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { SignupComponent } from './auth/signup/signup.component';
-import { SigninComponent } from './auth/signin/signin.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
+import { AuthModule } from './auth/auth.module';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JWTInterceptor } from './core/services/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,6 @@ import { ButtonModule } from 'primeng/button';
     MenuComponent,
     HomeComponent,
     DashboardComponent,
-    SignupComponent,
-    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +31,13 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     FormsModule,
     BrowserAnimationsModule,
-    ButtonModule
+    ButtonModule,
+    AuthModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

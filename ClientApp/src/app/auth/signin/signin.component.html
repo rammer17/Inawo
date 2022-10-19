@@ -1,1 +1,14 @@
-<p>signin works!</p>
+<div class="d-flex justify-content-center align-items-center wrapper">
+    <form [formGroup]="signInForm" (ngSubmit)="onSignIn()" class="form">
+        <h1>Влезте в профила си</h1>
+        <div class="form-floating mt-3">
+            <input type="email" class="form-control" id="email" placeholder="dummy" formControlName="email">
+            <label for="email">Email</label>
+        </div>
+        <div class="form-floating mt-3">
+            <input type="password" class="form-control" id="password" placeholder="dummy" formControlName="password">
+            <label for="password">Password</label>
+        </div>
+            <button pButton label="Вход" type="submit" class="w-100 mt-4" [disabled]="!signInForm.valid"></button>
+    </form>
+</div>

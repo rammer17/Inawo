@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Inawo\\Inawo.csproj": {}
+    "C:\\Users\\Student\\Desktop\\IT 2022_2023\\11v_9\\Georgi 11v\\Inawo\\Inawo.csproj": {}
   },
   "projects": {
-    "G:\\Inawo\\Inawo.csproj": {
+    "C:\\Users\\Student\\Desktop\\IT 2022_2023\\11v_9\\Georgi 11v\\Inawo\\Inawo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Inawo\\Inawo.csproj",
+        "projectUniqueName": "C:\\Users\\Student\\Desktop\\IT 2022_2023\\11v_9\\Georgi 11v\\Inawo\\Inawo.csproj",
         "projectName": "Inawo",
-        "projectPath": "G:\\Inawo\\Inawo.csproj",
-        "packagesPath": "C:\\Users\\Georgi\\.nuget\\packages\\",
-        "outputPath": "G:\\Inawo\\obj\\",
+        "projectPath": "C:\\Users\\Student\\Desktop\\IT 2022_2023\\11v_9\\Georgi 11v\\Inawo\\Inawo.csproj",
+        "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Student\\Desktop\\IT 2022_2023\\11v_9\\Georgi 11v\\Inawo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Georgi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Student\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,7 +84,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -95,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
